@@ -1,0 +1,3 @@
+rootProject.name = 'AutoMatic'
+
+includeFlat 'AutoMaticJPA'
