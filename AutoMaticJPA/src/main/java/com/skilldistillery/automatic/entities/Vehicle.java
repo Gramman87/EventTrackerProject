@@ -1,13 +1,21 @@
 package com.skilldistillery.automatic.entities;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
-import javax.persistence.Column;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Vehicle {
@@ -28,8 +36,18 @@ public class Vehicle {
 
 	private LocalDateTime created;
 
-	@Column(name = "vehicle_type_id")
-	private int vehicleTypeId;
+	@ManyToOne
+	@JoinColumn(name = "vehicle_type_id")
+	private VehicleType vehicleType;
+
+	@JsonIgnore
+	@ManyToMany(mappedBy = "vehicles")
+	private List<Service> services;
+
+	@JsonIgnore
+	@ManyToMany(cascade = CascadeType.PERSIST)
+	@JoinTable(name = "user_vehicle", joinColumns = @JoinColumn(name = "vehicle_id"), inverseJoinColumns = @JoinColumn(name = "user_id"))
+	private List<User> users;
 
 	public Vehicle() {
 		super();
@@ -91,12 +109,28 @@ public class Vehicle {
 		this.created = created;
 	}
 
-	public int getVehicleTypeId() {
-		return vehicleTypeId;
+	public VehicleType getVehicleType() {
+		return vehicleType;
 	}
 
-	public void setVehicleTypeId(int vehicleTypeId) {
-		this.vehicleTypeId = vehicleTypeId;
+	public void setVehicleType(VehicleType vehicleType) {
+		this.vehicleType = vehicleType;
+	}
+
+	public List<Service> getServices() {
+		return services;
+	}
+
+	public void setServices(List<Service> services) {
+		this.services = services;
+	}
+
+	public List<User> getUsers() {
+		return users;
+	}
+
+	public void setUsers(List<User> users) {
+		this.users = users;
 	}
 
 	@Override
@@ -119,7 +153,41 @@ public class Vehicle {
 	@Override
 	public String toString() {
 		return "Vehicle [id=" + id + ", vin=" + vin + ", make=" + make + ", model=" + model + ", year=" + year
-				+ ", color=" + color + ", created=" + created + ", vehicleTypeId=" + vehicleTypeId + "]";
+				+ ", color=" + color + ", created=" + created + ", vehicleTypeId=" + vehicleType + "]";
+	}
+
+	public void addService(Service service) {
+		if (services == null) {
+			services = new ArrayList<>();
+		}
+		if (!services.contains(service)) {
+			services.add(service);
+			service.addVehicle(this);
+		}
+	}
+
+	public void removeService(Service service) {
+		if (services != null && services.contains(service)) {
+			services.remove(service);
+			service.removeVehicle(this);
+		}
+	}
+
+	public void addUser(User user) {
+		if (users == null) {
+			users = new ArrayList<>();
+		}
+		if (!users.contains(user)) {
+			users.add(user);
+			user.addVehicle(this);
+		}
+	}
+
+	public void removeUser(User user) {
+		if (users != null && users.contains(user)) {
+			users.remove(user);
+			user.removeVehicle(this);
+		}
 	}
 
 }

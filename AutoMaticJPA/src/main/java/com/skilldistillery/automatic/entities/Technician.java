@@ -1,6 +1,8 @@
 package com.skilldistillery.automatic.entities;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.Column;
@@ -8,24 +10,34 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Technician {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	
+
 	@Column(name = "first_name")
 	private String firstName;
-	
+
 	@Column(name = "last_name")
 	private String lastName;
-	
+
 	private LocalDateTime created;
-	
-	@Column(name = "shop_id")
-	private int shopId;
+
+	@ManyToOne
+	@JoinColumn(name = "shop_id")
+	private RepairShop repairShop;
+
+	@JsonIgnore
+	@ManyToMany(mappedBy = "technicians")
+	private List<Service> services;
 
 	public Technician() {
 		super();
@@ -63,12 +75,20 @@ public class Technician {
 		this.created = created;
 	}
 
-	public int getShopId() {
-		return shopId;
+	public RepairShop getRepairShop() {
+		return repairShop;
 	}
 
-	public void setShopId(int shopId) {
-		this.shopId = shopId;
+	public void setRepairShop(RepairShop repairShop) {
+		this.repairShop = repairShop;
+	}
+
+	public List<Service> getServices() {
+		return services;
+	}
+
+	public void setServices(List<Service> services) {
+		this.services = services;
 	}
 
 	@Override
@@ -91,7 +111,24 @@ public class Technician {
 	@Override
 	public String toString() {
 		return "Technician [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", created=" + created
-				+ ", shopId=" + shopId + "]";
+				+ "]";
+	}
+
+	public void addService(Service service) {
+		if (services == null) {
+			services = new ArrayList<>();
+		}
+		if (!services.contains(service)) {
+			services.add(service);
+			service.addTechnician(this);
+		}
+	}
+
+	public void removeService(Service service) {
+		if (services != null && services.contains(service)) {
+			services.remove(service);
+			service.removeTechnician(this);
+		}
 	}
 
 }

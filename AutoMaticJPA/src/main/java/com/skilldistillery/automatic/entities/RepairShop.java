@@ -1,6 +1,8 @@
 package com.skilldistillery.automatic.entities;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.Column;
@@ -8,7 +10,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "repair_shop")
@@ -26,6 +32,14 @@ public class RepairShop {
 	private String phoneNumber;
 
 	private LocalDateTime created;
+
+	@JsonIgnore
+	@OneToMany(mappedBy = "repairShop")
+	private List<Technician> technicians;
+
+	@JsonIgnore
+	@ManyToMany(mappedBy = "repairShops")
+	private List<Service> services;
 
 	public RepairShop() {
 		super();
@@ -71,6 +85,22 @@ public class RepairShop {
 		this.created = created;
 	}
 
+	public List<Technician> getTechnicians() {
+		return technicians;
+	}
+
+	public void setTechnicians(List<Technician> technicians) {
+		this.technicians = technicians;
+	}
+
+	public List<Service> getServices() {
+		return services;
+	}
+
+	public void setServices(List<Service> services) {
+		this.services = services;
+	}
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
@@ -92,6 +122,26 @@ public class RepairShop {
 	public String toString() {
 		return "RepairShop [id=" + id + ", name=" + name + ", location=" + location + ", phoneNumber=" + phoneNumber
 				+ ", created=" + created + "]";
+	}
+
+	public void addTech(Technician tech) {
+		if (technicians == null) {
+			technicians = new ArrayList<>();
+		}
+		if (!technicians.contains(tech)) {
+			technicians.add(tech);
+			if (tech.getRepairShop() != null) {
+				tech.getRepairShop().getTechnicians().remove(tech);
+			}
+			tech.setRepairShop(this);
+		}
+	}
+
+	public void removeTech(Technician tech) {
+		tech.setRepairShop(null);
+		if (technicians != null) {
+			technicians.remove(tech);
+		}
 	}
 
 }

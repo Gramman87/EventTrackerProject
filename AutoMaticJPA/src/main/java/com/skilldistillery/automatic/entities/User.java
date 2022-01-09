@@ -1,6 +1,8 @@
 package com.skilldistillery.automatic.entities;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.Column;
@@ -8,6 +10,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class User {
@@ -27,6 +32,10 @@ public class User {
 	private String lastName;
 
 	private LocalDateTime created;
+
+	@JsonIgnore
+	@ManyToMany(mappedBy = "users")
+	private List<Vehicle> vehicles;
 
 	public User() {
 		super();
@@ -80,6 +89,14 @@ public class User {
 		this.created = created;
 	}
 
+	public List<Vehicle> getVehicles() {
+		return vehicles;
+	}
+
+	public void setVehicles(List<Vehicle> vehicles) {
+		this.vehicles = vehicles;
+	}
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
@@ -101,6 +118,23 @@ public class User {
 	public String toString() {
 		return "User [id=" + id + ", email=" + email + ", password=" + password + ", firstName=" + firstName
 				+ ", lastName=" + lastName + ", created=" + created + "]";
+	}
+
+	public void addVehicle(Vehicle vehicle) {
+		if (vehicles == null) {
+			vehicles = new ArrayList<>();
+		}
+		if (!vehicles.contains(vehicle)) {
+			vehicles.add(vehicle);
+			vehicle.addUser(this);
+		}
+	}
+
+	public void removeVehicle(Vehicle vehicle) {
+		if (vehicles != null && vehicles.contains(vehicle)) {
+			vehicles.remove(vehicle);
+			vehicle.removeUser(this);
+		}
 	}
 
 }

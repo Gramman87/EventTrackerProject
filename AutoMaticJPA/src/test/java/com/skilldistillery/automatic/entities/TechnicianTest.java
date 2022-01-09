@@ -54,7 +54,6 @@ class TechnicianTest {
 	void test1() {
 		assertNotNull(tech);
 		assertEquals("Gertie", tech.getFirstName());
-		assertEquals(9, tech.getShopId());
 		assertEquals(2018, tech.getCreated().getYear());
 	}
 
