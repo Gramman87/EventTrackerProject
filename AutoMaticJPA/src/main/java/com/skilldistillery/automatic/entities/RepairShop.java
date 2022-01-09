@@ -86,7 +86,8 @@ public class RepairShop {
 	}
 
 	public List<Technician> getTechnicians() {
-		return technicians;
+		List<Technician> list = technicians;
+		return list;
 	}
 
 	public void setTechnicians(List<Technician> technicians) {
@@ -94,7 +95,8 @@ public class RepairShop {
 	}
 
 	public List<Service> getServices() {
-		return services;
+		List<Service> list = services;
+		return list;
 	}
 
 	public void setServices(List<Service> services) {

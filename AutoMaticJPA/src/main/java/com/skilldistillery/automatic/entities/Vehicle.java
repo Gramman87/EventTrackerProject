@@ -118,7 +118,8 @@ public class Vehicle {
 	}
 
 	public List<Service> getServices() {
-		return services;
+		List<Service> list = services;
+		return list;
 	}
 
 	public void setServices(List<Service> services) {
@@ -126,7 +127,8 @@ public class Vehicle {
 	}
 
 	public List<User> getUsers() {
-		return users;
+		List<User> list = users;
+		return list;
 	}
 
 	public void setUsers(List<User> users) {

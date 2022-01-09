@@ -41,7 +41,7 @@ class UesrTest {
 		em.close();
 		user = null;
 	}
-	
+
 //	mysql> select * from user where id = 1;
 //	+----+----------------------+-------------+------------+-----------+---------------------+
 //	| id | email                | password    | first_name | last_name | created             |
@@ -56,6 +56,20 @@ class UesrTest {
 		assertEquals("Anni", user.getFirstName());
 		assertEquals(10, user.getCreated().getMonthValue());
 		assertEquals(30, user.getCreated().getDayOfMonth());
+	}
+
+//	mysql> SELECT COUNT(*) FROM vehicle v JOIN user_vehicle uv ON v.id = uv.user_id JOIN user u ON u.id = uv.vehicle_id WHERE u.id = 1;
+//	+----------+
+//	| COUNT(*) |
+//	+----------+
+//	|        1 |
+//	+----------+
+
+	@Test
+	@DisplayName("entity mapping tests")
+	void test2() {
+		assertNotNull(user.getVehicles());
+		assertEquals(1, user.getVehicles().size());
 	}
 
 }

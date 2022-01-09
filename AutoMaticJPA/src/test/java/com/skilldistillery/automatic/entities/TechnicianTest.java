@@ -57,4 +57,26 @@ class TechnicianTest {
 		assertEquals(2018, tech.getCreated().getYear());
 	}
 
+//	mysql> SELECT COUNT(*) FROM service s JOIN technician_services ts ON s.id = ts.service_id JOIN technician t ON t.id = ts.technician_id WHERE t.id = 1;
+//	+----------+
+//	| COUNT(*) |
+//	+----------+
+//	|       27 |
+//	+----------+
+
+//	mysql> SELECT rs.name FROM repair_shop rs JOIN technician t ON t.shop_id = rs.id WHERE t.id = 1;
+//	+----------+
+//	| name     |
+//	+----------+
+//	| Innotype |
+//	+----------+
+	
+	@Test
+	@DisplayName("entity mapping tests")
+	void test2() {
+		assertNotNull(tech.getServices());
+		assertEquals(27, tech.getServices().size());
+		assertEquals("Innotype", tech.getRepairShop().getName());
+	}
+
 }

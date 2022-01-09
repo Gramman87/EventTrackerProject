@@ -90,7 +90,8 @@ public class User {
 	}
 
 	public List<Vehicle> getVehicles() {
-		return vehicles;
+		List<Vehicle> list = vehicles;
+		return list;
 	}
 
 	public void setVehicles(List<Vehicle> vehicles) {

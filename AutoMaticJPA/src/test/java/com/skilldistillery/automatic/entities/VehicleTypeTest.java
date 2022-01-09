@@ -2,6 +2,9 @@ package com.skilldistillery.automatic.entities;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -55,6 +58,20 @@ class VehicleTypeTest {
 		assertNotNull(vehicleType);
 		assertEquals(1, vehicleType.getId());
 		assertEquals("Terry-Kozey", vehicleType.getType());
+	}
+	
+//	mysql> select count(*) from vehicle v join vehicle_type vt on v.vehicle_type_id = vt.id where vt.id = 3;
+//	+----------+
+//	| count(*) |
+//	+----------+
+//	|       22 |
+//	+----------+
+	
+	@Test
+	@DisplayName("entity mapping tests")
+	void test2() {
+		assertNotNull(vehicleType.getVehicles());
+		assertEquals(22, vehicleType.getVehicles().size());
 	}
 
 }

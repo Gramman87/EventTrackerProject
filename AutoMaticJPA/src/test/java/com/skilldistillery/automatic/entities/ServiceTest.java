@@ -56,5 +56,18 @@ class ServiceTest {
 		assertEquals("Stucco Mason", service.getType());
 		assertEquals(05, service.getCreated().getMonthValue());
 	}
+	
+//	mysql> SELECT COUNT(*) FROM service s JOIN service_location sl ON s.id = sl.service_id JOIN repair_shop rs ON rs.id = sl.repair_shop_id WHERE s.id = 1;
+//	+----------+
+//	| COUNT(*) |
+//	+----------+
+//	|        1 |
+//	+----------+
+	
+	@Test
+	@DisplayName("entity mapping tests")
+	void test2() {
+		assertNotNull(service.getRepairShops());
+	}
 
 }

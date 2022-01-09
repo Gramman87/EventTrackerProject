@@ -48,7 +48,7 @@ class VehicleTest {
 //	+----+-------------------+------+-----------+------+------------+---------------------+-----------------+
 //	|  1 | 2C3CCAJTXCH262146 | Ford | Excursion | 2004 | Aquamarine | 2018-11-19 09:45:44 |               1 |
 //	+----+-------------------+------+-----------+------+------------+---------------------+-----------------+
-	
+
 	@Test
 	@DisplayName("JDBC connection & temporal tests")
 	void test1() {
@@ -57,6 +57,29 @@ class VehicleTest {
 		assertEquals(2018, vehicle.getCreated().getYear());
 		assertEquals(11, vehicle.getCreated().getMonthValue());
 
+	}
+
+//	mysql> SELECT COUNT(*) FROM service s JOIN vehicle_service vs ON s.id = vs.service_id JOIN vehicle v ON v.id = vs.vehicle_id WHERE v.id = 1;
+//	+----------+
+//	| COUNT(*) |
+//	+----------+
+//	|       10 |
+//	+----------+
+
+//	mysql> SELECT COUNT(*) FROM user u JOIN user_vehicle uv ON u.id = uv.user_id JOIN vehicle v ON v.id = uv.vehicle_id WHERE v.id = 1;
+//	+----------+
+//	| COUNT(*) |
+//	+----------+
+//	|        3 |
+//	+----------+
+
+	@Test
+	@DisplayName("entity mapping tests")
+	void test2() {
+		assertNotNull(vehicle.getServices());
+		assertEquals(10, vehicle.getServices().size());
+		assertNotNull(vehicle.getUsers());
+		assertEquals(3, vehicle.getUsers().size());
 	}
 
 }

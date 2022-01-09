@@ -40,7 +40,7 @@ public class Service {
 	@ManyToMany(cascade = CascadeType.PERSIST)
 	@JoinTable(name = "technician_services", joinColumns = @JoinColumn(name = "service_id"), inverseJoinColumns = @JoinColumn(name = "technician_id"))
 	private List<Technician> technicians;
-	
+
 	@JsonIgnore
 	@ManyToMany(cascade = CascadeType.PERSIST)
 	@JoinTable(name = "vehicle_service", joinColumns = @JoinColumn(name = "service_id"), inverseJoinColumns = @JoinColumn(name = "vehicle_id"))
@@ -91,7 +91,8 @@ public class Service {
 	}
 
 	public List<RepairShop> getRepairShops() {
-		return repairShops;
+		List<RepairShop> list = repairShops;
+		return list;
 	}
 
 	public void setRepairShops(List<RepairShop> repairShops) {
@@ -99,7 +100,8 @@ public class Service {
 	}
 
 	public List<Technician> getTechnicians() {
-		return technicians;
+		List<Technician> list = technicians;
+		return list;
 	}
 
 	public void setTechnicians(List<Technician> tech) {
@@ -107,7 +109,8 @@ public class Service {
 	}
 
 	public List<Vehicle> getVehicles() {
-		return vehicles;
+		List<Vehicle> list = vehicles;
+		return list;
 	}
 
 	public void setVehicles(List<Vehicle> vehicles) {
@@ -153,7 +156,7 @@ public class Service {
 			tech.removeService(this);
 		}
 	}
-	
+
 	public void addVehicle(Vehicle vehicle) {
 		if (vehicles == null) {
 			vehicles = new ArrayList<>();
@@ -163,7 +166,7 @@ public class Service {
 			vehicle.addService(this);
 		}
 	}
-	
+
 	public void removeVehicle(Vehicle vehicle) {
 		if (vehicles != null && vehicles.contains(vehicle)) {
 			vehicles.remove(vehicle);

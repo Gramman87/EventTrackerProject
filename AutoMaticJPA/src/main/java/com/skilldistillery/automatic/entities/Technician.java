@@ -84,7 +84,8 @@ public class Technician {
 	}
 
 	public List<Service> getServices() {
-		return services;
+		List<Service> list = services;
+		return list;
 	}
 
 	public void setServices(List<Service> services) {
