@@ -7,7 +7,12 @@
 		<provider>org.hibernate.jpa.HibernatePersistenceProvider
     </provider>
 
-		<class>com.skilldistillery.xtreme.entities.Vehicle</class>
+		<class>com.skilldistillery.automatic.entities.RepairShop</class>
+		<class>com.skilldistillery.automatic.entities.Service</class>
+		<class>com.skilldistillery.automatic.entities.Technician</class>
+		<class>com.skilldistillery.automatic.entities.User</class>
+		<class>com.skilldistillery.automatic.entities.Vehicle</class>
+		<class>com.skilldistillery.automatic.entities.VehicleType</class>
 
 		<properties>
 			<property name="javax.persistence.jdbc.url"

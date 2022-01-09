@@ -51,11 +51,11 @@ CREATE TABLE IF NOT EXISTS `vehicle` (
 
 
 -- -----------------------------------------------------
--- Table `location`
+-- Table `repair_shop`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `location` ;
+DROP TABLE IF EXISTS `repair_shop` ;
 
-CREATE TABLE IF NOT EXISTS `location` (
+CREATE TABLE IF NOT EXISTS `repair_shop` (
   `id` INT NOT NULL,
   `name` VARCHAR(100) NOT NULL,
   `location` VARCHAR(150) NOT NULL,
@@ -79,7 +79,7 @@ CREATE TABLE IF NOT EXISTS `technician` (
   INDEX `fk_technician_maintanence_shop1_idx` (`shop_id` ASC),
   CONSTRAINT `fk_technician_maintanence_shop1`
     FOREIGN KEY (`shop_id`)
-    REFERENCES `location` (`id`)
+    REFERENCES `repair_shop` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION);
 
@@ -185,7 +185,7 @@ CREATE TABLE IF NOT EXISTS `service_location` (
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_service_has_location_location1`
     FOREIGN KEY (`location_id`)
-    REFERENCES `location` (`id`)
+    REFERENCES `repair_shop` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION);
 
@@ -324,20 +324,20 @@ COMMIT;
 
 
 -- -----------------------------------------------------
--- Data for table `location`
+-- Data for table `repair_shop`
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `automaticDB`;
-INSERT INTO `location` (`id`, `name`, `location`, `phone_number`, `created`) VALUES (1, 'Meevee', '65647 Algoma Lane', '(285) 6545998', '2020-10-11 15:42:29');
-INSERT INTO `location` (`id`, `name`, `location`, `phone_number`, `created`) VALUES (2, 'Yacero', '389 Huxley Parkway', '(312) 6232657', '2021-03-23 10:20:11');
-INSERT INTO `location` (`id`, `name`, `location`, `phone_number`, `created`) VALUES (3, 'Mybuzz', '0 Kenwood Crossing', '(478) 2832518', '2017-07-04 00:30:57');
-INSERT INTO `location` (`id`, `name`, `location`, `phone_number`, `created`) VALUES (4, 'Linkbridge', '0 Kenwood Alley', '(105) 9792731', '2017-02-18 03:14:06');
-INSERT INTO `location` (`id`, `name`, `location`, `phone_number`, `created`) VALUES (5, 'Blogpad', '74183 New Castle Plaza', '(551) 7753539', '2020-08-06 10:23:54');
-INSERT INTO `location` (`id`, `name`, `location`, `phone_number`, `created`) VALUES (6, 'Gabvine', '846 Buell Drive', '(651) 1033930', '2015-05-29 19:22:56');
-INSERT INTO `location` (`id`, `name`, `location`, `phone_number`, `created`) VALUES (7, 'Tagopia', '165 Ruskin Junction', '(473) 4737553', '2021-09-27 09:36:04');
-INSERT INTO `location` (`id`, `name`, `location`, `phone_number`, `created`) VALUES (8, 'Vidoo', '6036 Esker Park', '(978) 9690100', '2021-12-19 07:05:22');
-INSERT INTO `location` (`id`, `name`, `location`, `phone_number`, `created`) VALUES (9, 'Innotype', '01851 Prairieview Plaza', '(690) 5555915', '2013-12-07 15:32:37');
-INSERT INTO `location` (`id`, `name`, `location`, `phone_number`, `created`) VALUES (10, 'Skyndu', '97557 Kensington Avenue', '(535) 9128563', '2013-06-06 09:26:00');
+INSERT INTO `repair_shop` (`id`, `name`, `location`, `phone_number`, `created`) VALUES (1, 'Meevee', '65647 Algoma Lane', '(285) 6545998', '2020-10-11 15:42:29');
+INSERT INTO `repair_shop` (`id`, `name`, `location`, `phone_number`, `created`) VALUES (2, 'Yacero', '389 Huxley Parkway', '(312) 6232657', '2021-03-23 10:20:11');
+INSERT INTO `repair_shop` (`id`, `name`, `location`, `phone_number`, `created`) VALUES (3, 'Mybuzz', '0 Kenwood Crossing', '(478) 2832518', '2017-07-04 00:30:57');
+INSERT INTO `repair_shop` (`id`, `name`, `location`, `phone_number`, `created`) VALUES (4, 'Linkbridge', '0 Kenwood Alley', '(105) 9792731', '2017-02-18 03:14:06');
+INSERT INTO `repair_shop` (`id`, `name`, `location`, `phone_number`, `created`) VALUES (5, 'Blogpad', '74183 New Castle Plaza', '(551) 7753539', '2020-08-06 10:23:54');
+INSERT INTO `repair_shop` (`id`, `name`, `location`, `phone_number`, `created`) VALUES (6, 'Gabvine', '846 Buell Drive', '(651) 1033930', '2015-05-29 19:22:56');
+INSERT INTO `repair_shop` (`id`, `name`, `location`, `phone_number`, `created`) VALUES (7, 'Tagopia', '165 Ruskin Junction', '(473) 4737553', '2021-09-27 09:36:04');
+INSERT INTO `repair_shop` (`id`, `name`, `location`, `phone_number`, `created`) VALUES (8, 'Vidoo', '6036 Esker Park', '(978) 9690100', '2021-12-19 07:05:22');
+INSERT INTO `repair_shop` (`id`, `name`, `location`, `phone_number`, `created`) VALUES (9, 'Innotype', '01851 Prairieview Plaza', '(690) 5555915', '2013-12-07 15:32:37');
+INSERT INTO `repair_shop` (`id`, `name`, `location`, `phone_number`, `created`) VALUES (10, 'Skyndu', '97557 Kensington Avenue', '(535) 9128563', '2013-06-06 09:26:00');
 
 COMMIT;
 

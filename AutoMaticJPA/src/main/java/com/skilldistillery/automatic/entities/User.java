@@ -10,30 +10,27 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Vehicle {
+public class User {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
-	private String vin;
+	private String email;
 
-	private String make;
+	private String password;
 
-	private String model;
+	@Column(name = "first_name")
+	private String firstName;
 
-	private Integer year;
-
-	private String color;
+	@Column(name = "last_name")
+	private String lastName;
 
 	private LocalDateTime created;
 
 	private LocalDateTime updated;
 
-	@Column(name = "vehicle_type_id")
-	private int vehicleTypeId;
-
-	public Vehicle() {
+	public User() {
 		super();
 	}
 
@@ -45,44 +42,36 @@ public class Vehicle {
 		this.id = id;
 	}
 
-	public String getVin() {
-		return vin;
+	public String getEmail() {
+		return email;
 	}
 
-	public void setVin(String vin) {
-		this.vin = vin;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
-	public String getMake() {
-		return make;
+	public String getPassword() {
+		return password;
 	}
 
-	public void setMake(String make) {
-		this.make = make;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
-	public String getModel() {
-		return model;
+	public String getFirstName() {
+		return firstName;
 	}
 
-	public void setModel(String model) {
-		this.model = model;
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
 	}
 
-	public Integer getYear() {
-		return year;
+	public String getLastName() {
+		return lastName;
 	}
 
-	public void setYear(Integer year) {
-		this.year = year;
-	}
-
-	public String getColor() {
-		return color;
-	}
-
-	public void setColor(String color) {
-		this.color = color;
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
 	}
 
 	public LocalDateTime getCreated() {
@@ -101,14 +90,6 @@ public class Vehicle {
 		this.updated = updated;
 	}
 
-	public int getVehicleTypeId() {
-		return vehicleTypeId;
-	}
-
-	public void setVehicleTypeId(int vehicleTypeId) {
-		this.vehicleTypeId = vehicleTypeId;
-	}
-
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
@@ -122,15 +103,14 @@ public class Vehicle {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Vehicle other = (Vehicle) obj;
+		User other = (User) obj;
 		return id == other.id;
 	}
 
 	@Override
 	public String toString() {
-		return "Vehicle [id=" + id + ", vin=" + vin + ", make=" + make + ", model=" + model + ", year=" + year
-				+ ", color=" + color + ", created=" + created + ", updated=" + updated + ", vehicleTypeId="
-				+ vehicleTypeId + "]";
+		return "User [id=" + id + ", email=" + email + ", password=" + password + ", firstName=" + firstName
+				+ ", lastName=" + lastName + ", created=" + created + ", updated=" + updated + "]";
 	}
 
 }
