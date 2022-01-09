@@ -28,8 +28,6 @@ public class Vehicle {
 
 	private LocalDateTime created;
 
-	private LocalDateTime updated;
-
 	@Column(name = "vehicle_type_id")
 	private int vehicleTypeId;
 
@@ -93,14 +91,6 @@ public class Vehicle {
 		this.created = created;
 	}
 
-	public LocalDateTime getUpdated() {
-		return updated;
-	}
-
-	public void setUpdated(LocalDateTime updated) {
-		this.updated = updated;
-	}
-
 	public int getVehicleTypeId() {
 		return vehicleTypeId;
 	}
@@ -129,8 +119,7 @@ public class Vehicle {
 	@Override
 	public String toString() {
 		return "Vehicle [id=" + id + ", vin=" + vin + ", make=" + make + ", model=" + model + ", year=" + year
-				+ ", color=" + color + ", created=" + created + ", updated=" + updated + ", vehicleTypeId="
-				+ vehicleTypeId + "]";
+				+ ", color=" + color + ", created=" + created + ", vehicleTypeId=" + vehicleTypeId + "]";
 	}
 
 }

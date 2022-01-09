@@ -14,11 +14,11 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-class VehicleTest {
+class ServiceTest {
 
 	private static EntityManagerFactory emf;
 	private EntityManager em;
-	private Vehicle vehicle;
+	private Service service;
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
@@ -33,30 +33,28 @@ class VehicleTest {
 	@BeforeEach
 	void setUp() throws Exception {
 		em = emf.createEntityManager();
-		vehicle = em.find(Vehicle.class, 1);
+		service = em.find(Service.class, 1);
 	}
 
 	@AfterEach
 	void tearDown() throws Exception {
 		em.close();
-		vehicle = null;
+		service = null;
 	}
 
-//	mysql> select * from vehicle where id = 1;
-//	+----+-------------------+------+-----------+------+------------+---------------------+-----------------+
-//	| id | vin               | make | model     | year | color      | created             | vehicle_type_id |
-//	+----+-------------------+------+-----------+------+------------+---------------------+-----------------+
-//	|  1 | 2C3CCAJTXCH262146 | Ford | Excursion | 2004 | Aquamarine | 2018-11-19 09:45:44 |               1 |
-//	+----+-------------------+------+-----------+------+------------+---------------------+-----------------+
-	
+//	mysql> select * from service where id = 1;
+//	+----+--------------+---------------------+----------+---------+---------------+
+//	| id | type         | created             | odometer | cost    | technician_id |
+//	+----+--------------+---------------------+----------+---------+---------------+
+//	|  1 | Stucco Mason | 2018-05-24 12:39:13 |   287846 | 2506.29 |            22 |
+//	+----+--------------+---------------------+----------+---------+---------------+
+
 	@Test
 	@DisplayName("JDBC connection & temporal tests")
 	void test1() {
-		assertNotNull(vehicle);
-		assertEquals("Ford", vehicle.getMake());
-		assertEquals(2018, vehicle.getCreated().getYear());
-		assertEquals(11, vehicle.getCreated().getMonthValue());
-
+		assertNotNull(service);
+		assertEquals("Stucco Mason", service.getType());
+		assertEquals(05, service.getCreated().getMonthValue());
 	}
 
 }

@@ -14,11 +14,11 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-class VehicleTest {
+class VehicleTypeTest {
 
 	private static EntityManagerFactory emf;
 	private EntityManager em;
-	private Vehicle vehicle;
+	private VehicleType vehicleType;
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
@@ -33,30 +33,28 @@ class VehicleTest {
 	@BeforeEach
 	void setUp() throws Exception {
 		em = emf.createEntityManager();
-		vehicle = em.find(Vehicle.class, 1);
+		vehicleType = em.find(VehicleType.class, 1);
 	}
 
 	@AfterEach
 	void tearDown() throws Exception {
 		em.close();
-		vehicle = null;
+		vehicleType = null;
 	}
 
-//	mysql> select * from vehicle where id = 1;
-//	+----+-------------------+------+-----------+------+------------+---------------------+-----------------+
-//	| id | vin               | make | model     | year | color      | created             | vehicle_type_id |
-//	+----+-------------------+------+-----------+------+------------+---------------------+-----------------+
-//	|  1 | 2C3CCAJTXCH262146 | Ford | Excursion | 2004 | Aquamarine | 2018-11-19 09:45:44 |               1 |
-//	+----+-------------------+------+-----------+------+------------+---------------------+-----------------+
-	
-	@Test
-	@DisplayName("JDBC connection & temporal tests")
-	void test1() {
-		assertNotNull(vehicle);
-		assertEquals("Ford", vehicle.getMake());
-		assertEquals(2018, vehicle.getCreated().getYear());
-		assertEquals(11, vehicle.getCreated().getMonthValue());
+//	mysql> select * from vehicle_type where id = 1;
+//	+----+-------------+
+//	| id | type        |
+//	+----+-------------+
+//	|  1 | Terry-Kozey |
+//	+----+-------------+
 
+	@Test
+	@DisplayName("JDBC connection tests")
+	void test1() {
+		assertNotNull(vehicleType);
+		assertEquals(1, vehicleType.getId());
+		assertEquals("Terry-Kozey", vehicleType.getType());
 	}
 
 }

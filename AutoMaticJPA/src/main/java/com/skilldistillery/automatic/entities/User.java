@@ -28,8 +28,6 @@ public class User {
 
 	private LocalDateTime created;
 
-	private LocalDateTime updated;
-
 	public User() {
 		super();
 	}
@@ -82,14 +80,6 @@ public class User {
 		this.created = created;
 	}
 
-	public LocalDateTime getUpdated() {
-		return updated;
-	}
-
-	public void setUpdated(LocalDateTime updated) {
-		this.updated = updated;
-	}
-
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
@@ -110,7 +100,7 @@ public class User {
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", email=" + email + ", password=" + password + ", firstName=" + firstName
-				+ ", lastName=" + lastName + ", created=" + created + ", updated=" + updated + "]";
+				+ ", lastName=" + lastName + ", created=" + created + "]";
 	}
 
 }

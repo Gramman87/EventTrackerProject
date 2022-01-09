@@ -14,11 +14,11 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-class VehicleTest {
+class UesrTest {
 
 	private static EntityManagerFactory emf;
 	private EntityManager em;
-	private Vehicle vehicle;
+	private User user;
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
@@ -33,30 +33,29 @@ class VehicleTest {
 	@BeforeEach
 	void setUp() throws Exception {
 		em = emf.createEntityManager();
-		vehicle = em.find(Vehicle.class, 1);
+		user = em.find(User.class, 1);
 	}
 
 	@AfterEach
 	void tearDown() throws Exception {
 		em.close();
-		vehicle = null;
+		user = null;
 	}
-
-//	mysql> select * from vehicle where id = 1;
-//	+----+-------------------+------+-----------+------+------------+---------------------+-----------------+
-//	| id | vin               | make | model     | year | color      | created             | vehicle_type_id |
-//	+----+-------------------+------+-----------+------+------------+---------------------+-----------------+
-//	|  1 | 2C3CCAJTXCH262146 | Ford | Excursion | 2004 | Aquamarine | 2018-11-19 09:45:44 |               1 |
-//	+----+-------------------+------+-----------+------+------------+---------------------+-----------------+
 	
+//	mysql> select * from user where id = 1;
+//	+----+----------------------+-------------+------------+-----------+---------------------+
+//	| id | email                | password    | first_name | last_name | created             |
+//	+----+----------------------+-------------+------------+-----------+---------------------+
+//	|  1 | amccallam0@google.ca | NdokpCvD44i | Anni       | McCallam  | 2012-10-30 10:08:36 |
+//	+----+----------------------+-------------+------------+-----------+---------------------+
+
 	@Test
 	@DisplayName("JDBC connection & temporal tests")
 	void test1() {
-		assertNotNull(vehicle);
-		assertEquals("Ford", vehicle.getMake());
-		assertEquals(2018, vehicle.getCreated().getYear());
-		assertEquals(11, vehicle.getCreated().getMonthValue());
-
+		assertNotNull(user);
+		assertEquals("Anni", user.getFirstName());
+		assertEquals(10, user.getCreated().getMonthValue());
+		assertEquals(30, user.getCreated().getDayOfMonth());
 	}
 
 }

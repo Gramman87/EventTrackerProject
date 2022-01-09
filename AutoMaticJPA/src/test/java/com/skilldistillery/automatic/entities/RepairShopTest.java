@@ -14,11 +14,11 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-class VehicleTest {
+class RepairShopTest {
 
 	private static EntityManagerFactory emf;
 	private EntityManager em;
-	private Vehicle vehicle;
+	private RepairShop shop;
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
@@ -33,30 +33,29 @@ class VehicleTest {
 	@BeforeEach
 	void setUp() throws Exception {
 		em = emf.createEntityManager();
-		vehicle = em.find(Vehicle.class, 1);
+		shop = em.find(RepairShop.class, 1);
 	}
 
 	@AfterEach
 	void tearDown() throws Exception {
 		em.close();
-		vehicle = null;
+		shop = null;
 	}
 
-//	mysql> select * from vehicle where id = 1;
-//	+----+-------------------+------+-----------+------+------------+---------------------+-----------------+
-//	| id | vin               | make | model     | year | color      | created             | vehicle_type_id |
-//	+----+-------------------+------+-----------+------+------------+---------------------+-----------------+
-//	|  1 | 2C3CCAJTXCH262146 | Ford | Excursion | 2004 | Aquamarine | 2018-11-19 09:45:44 |               1 |
-//	+----+-------------------+------+-----------+------+------------+---------------------+-----------------+
-	
+//	mysql> select * from repair_shop where id = 1;
+//	+----+--------+-------------------+---------------+---------------------+
+//	| id | name   | location          | phone_number  | created             |
+//	+----+--------+-------------------+---------------+---------------------+
+//	|  1 | Meevee | 65647 Algoma Lane | (285) 6545998 | 2020-10-11 15:42:29 |
+//	+----+--------+-------------------+---------------+---------------------+
+
 	@Test
 	@DisplayName("JDBC connection & temporal tests")
 	void test1() {
-		assertNotNull(vehicle);
-		assertEquals("Ford", vehicle.getMake());
-		assertEquals(2018, vehicle.getCreated().getYear());
-		assertEquals(11, vehicle.getCreated().getMonthValue());
-
+		assertNotNull(shop);
+		assertEquals("Meevee", shop.getName());
+		assertEquals(11, shop.getCreated().getDayOfMonth());
+		assertEquals(2020, shop.getCreated().getYear());
 	}
 
 }

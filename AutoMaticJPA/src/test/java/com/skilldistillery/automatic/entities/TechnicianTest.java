@@ -14,11 +14,11 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-class VehicleTest {
+class TechnicianTest {
 
 	private static EntityManagerFactory emf;
 	private EntityManager em;
-	private Vehicle vehicle;
+	private Technician tech;
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
@@ -33,30 +33,29 @@ class VehicleTest {
 	@BeforeEach
 	void setUp() throws Exception {
 		em = emf.createEntityManager();
-		vehicle = em.find(Vehicle.class, 1);
+		tech = em.find(Technician.class, 1);
 	}
 
 	@AfterEach
 	void tearDown() throws Exception {
 		em.close();
-		vehicle = null;
+		tech = null;
 	}
 
-//	mysql> select * from vehicle where id = 1;
-//	+----+-------------------+------+-----------+------+------------+---------------------+-----------------+
-//	| id | vin               | make | model     | year | color      | created             | vehicle_type_id |
-//	+----+-------------------+------+-----------+------+------------+---------------------+-----------------+
-//	|  1 | 2C3CCAJTXCH262146 | Ford | Excursion | 2004 | Aquamarine | 2018-11-19 09:45:44 |               1 |
-//	+----+-------------------+------+-----------+------+------------+---------------------+-----------------+
-	
+//	mysql> select * from technician where id = 1;
+//	+----+------------+------------+---------------------+---------+
+//	| id | first_name | last_name  | created             | shop_id |
+//	+----+------------+------------+---------------------+---------+
+//	|  1 | Gertie     | Pietrowicz | 2018-03-23 11:58:38 |       9 |
+//	+----+------------+------------+---------------------+---------+
+
 	@Test
 	@DisplayName("JDBC connection & temporal tests")
 	void test1() {
-		assertNotNull(vehicle);
-		assertEquals("Ford", vehicle.getMake());
-		assertEquals(2018, vehicle.getCreated().getYear());
-		assertEquals(11, vehicle.getCreated().getMonthValue());
-
+		assertNotNull(tech);
+		assertEquals("Gertie", tech.getFirstName());
+		assertEquals(9, tech.getShopId());
+		assertEquals(2018, tech.getCreated().getYear());
 	}
 
 }
