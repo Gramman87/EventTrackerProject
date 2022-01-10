@@ -15,6 +15,8 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
+import org.hibernate.annotations.CreationTimestamp;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
@@ -34,6 +36,7 @@ public class Vehicle {
 
 	private String color;
 
+	@CreationTimestamp
 	private LocalDateTime created;
 
 	@ManyToOne

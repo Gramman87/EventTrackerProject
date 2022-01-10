@@ -31,8 +31,8 @@ public class VehicleController {
 	}
 
 	@GetMapping("vehicle/{id}")
-	public Vehicle showVehicle(@PathVariable Integer vehicleId, HttpServletResponse res) {
-		Vehicle vehicle = vehicleSvc.findById(vehicleId);
+	public Vehicle showVehicle(@PathVariable Integer id, HttpServletResponse res) {
+		Vehicle vehicle = vehicleSvc.findById(id);
 		if (vehicle == null) {
 			res.setStatus(404);
 		}

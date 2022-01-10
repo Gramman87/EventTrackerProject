@@ -34,6 +34,7 @@ public class VehicleServiceImpl implements VehicleService {
 	public Vehicle createVehicle(Vehicle vehicle) {
 		if (vehicle.getVehicleType() == null) {
 			VehicleType type = new VehicleType();
+			type.setId(1);
 			vehicle.setVehicleType(type);
 			vehicleRepo.saveAndFlush(vehicle);
 		}
@@ -55,7 +56,7 @@ public class VehicleServiceImpl implements VehicleService {
 			if (vehicle.getVehicleType() != null) {
 				managed.setVehicleType(vehicle.getVehicleType());
 			}
-			vehicleRepo.saveAndFlush(vehicle);
+			vehicleRepo.saveAndFlush(managed);
 		}
 		return vehicle;
 	}

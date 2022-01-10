@@ -12,6 +12,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
+import org.hibernate.annotations.CreationTimestamp;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
@@ -31,6 +33,7 @@ public class User {
 	@Column(name = "last_name")
 	private String lastName;
 
+	@CreationTimestamp
 	private LocalDateTime created;
 
 	@JsonIgnore
