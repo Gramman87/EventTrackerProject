@@ -2,14 +2,19 @@ package com.skilldistillery.automatic.services;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.skilldistillery.automatic.entities.Service;
+import com.skilldistillery.automatic.repositories.ServiceRepository;
 
 public class ServiceServiceImpl implements ServiceService {
 
+	@Autowired
+	private ServiceRepository serviceRepo;
+
 	@Override
 	public List<Service> findAllService() {
-		// TODO Auto-generated method stub
-		return null;
+		return serviceRepo.findAll();
 	}
 
 	@Override

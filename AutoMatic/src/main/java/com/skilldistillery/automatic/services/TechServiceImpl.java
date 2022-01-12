@@ -2,14 +2,19 @@ package com.skilldistillery.automatic.services;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.skilldistillery.automatic.entities.Technician;
+import com.skilldistillery.automatic.repositories.TechRepository;
 
 public class TechServiceImpl implements TechService {
 
+	@Autowired
+	private TechRepository techRepo;
+
 	@Override
 	public List<Technician> findAllTechs() {
-		// TODO Auto-generated method stub
-		return null;
+		return techRepo.findAll();
 	}
 
 	@Override

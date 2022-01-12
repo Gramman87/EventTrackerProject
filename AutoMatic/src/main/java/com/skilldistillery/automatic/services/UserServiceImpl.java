@@ -2,14 +2,19 @@ package com.skilldistillery.automatic.services;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.skilldistillery.automatic.entities.User;
+import com.skilldistillery.automatic.repositories.UserRepository;
 
 public class UserServiceImpl implements UserService {
 
+	@Autowired
+	private UserRepository userRepo;
+
 	@Override
 	public List<User> findAllUsers() {
-		// TODO Auto-generated method stub
-		return null;
+		return userRepo.findAll();
 	}
 
 	@Override
