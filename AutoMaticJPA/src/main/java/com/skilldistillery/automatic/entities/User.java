@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -35,6 +36,9 @@ public class User {
 
 	@CreationTimestamp
 	private LocalDateTime created;
+
+	@UpdateTimestamp
+	private LocalDateTime updated;
 
 	@JsonIgnore
 	@ManyToMany(mappedBy = "users")
@@ -90,6 +94,14 @@ public class User {
 
 	public void setCreated(LocalDateTime created) {
 		this.created = created;
+	}
+
+	public LocalDateTime getUpdated() {
+		return updated;
+	}
+
+	public void setUpdated(LocalDateTime updated) {
+		this.updated = updated;
 	}
 
 	public List<Vehicle> getVehicles() {

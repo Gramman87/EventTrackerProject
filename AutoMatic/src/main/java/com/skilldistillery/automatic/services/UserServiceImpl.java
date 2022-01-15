@@ -22,29 +22,41 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public User findUserById(int id) {
-		Optional<User> userOpt = userRepo.findById(id);
-		if (userOpt.isPresent()) {
-			return userOpt.get();
+		Optional<User> optUser = userRepo.findById(id);
+		if (optUser.isPresent()) {
+			return optUser.get();
 		}
 		return null;
 	}
 
 	@Override
 	public User createUser(User user) {
-		if ()
-		return null;
+		return userRepo.saveAndFlush(user);
 	}
 
 	@Override
 	public User updateUser(int id, User user) {
-		// TODO Auto-generated method stub
-		return null;
+		Optional<User> optUser = userRepo.findById(id);
+		User managed = null;
+		if (optUser.isPresent()) {
+			managed = optUser.get();
+			managed.setEmail(user.getEmail());
+			managed.setPassword(user.getPassword());
+			managed.setFirstName(user.getFirstName());
+			managed.setLastName(user.getLastName());
+			userRepo.saveAndFlush(managed);
+		}
+		return user;
 	}
 
 	@Override
 	public boolean deleteUser(int id) {
-		// TODO Auto-generated method stub
-		return false;
+		boolean deleted = false;
+		if (userRepo.existsById(id)) {
+			userRepo.deleteById(id);
+			deleted = true;
+		}
+		return deleted;
 	}
 
 }

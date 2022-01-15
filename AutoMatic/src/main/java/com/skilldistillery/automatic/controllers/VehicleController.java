@@ -25,12 +25,12 @@ public class VehicleController {
 	@Autowired
 	private VehicleService vehicleSvc;
 
-	@GetMapping("index")
-	public List<Vehicle> index() {
+	@GetMapping("vehicles")
+	public List<Vehicle> vehicles() {
 		return vehicleSvc.findAllVehicles();
 	}
 
-	@GetMapping("vehicle/{id}")
+	@GetMapping("vehicles/{id}")
 	public Vehicle showVehicle(@PathVariable Integer id, HttpServletResponse res) {
 		Vehicle vehicle = vehicleSvc.findById(id);
 		if (vehicle == null) {
@@ -39,7 +39,7 @@ public class VehicleController {
 		return vehicle;
 	}
 
-	@PostMapping("vehicle")
+	@PostMapping("vehicles")
 	public Vehicle createVehicle(@RequestBody Vehicle vehicle, HttpServletRequest req, HttpServletResponse res) {
 		try {
 			vehicleSvc.createVehicle(vehicle);
@@ -56,7 +56,7 @@ public class VehicleController {
 		return vehicle;
 	}
 
-	@PutMapping("vehicle/{id}")
+	@PutMapping("vehicles/{id}")
 	public Vehicle updateVehicle(@PathVariable Integer id, @RequestBody Vehicle vehicle, HttpServletResponse res) {
 		try {
 			vehicle = vehicleSvc.updateVehicle(id, vehicle);
@@ -71,7 +71,7 @@ public class VehicleController {
 		return vehicle;
 	}
 
-	@DeleteMapping("vehicle/{id}")
+	@DeleteMapping("vehicles/{id}")
 	public void deleteVehicle(@PathVariable Integer id, HttpServletResponse res) {
 		try {
 			if (vehicleSvc.deleteVehicle(id)) {

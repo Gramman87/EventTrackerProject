@@ -37,7 +37,7 @@ public class Technician {
 
 	@JsonIgnore
 	@ManyToMany(mappedBy = "technicians")
-	private List<Service> services;
+	private List<Services> services;
 
 	public Technician() {
 		super();
@@ -83,12 +83,12 @@ public class Technician {
 		this.repairShop = repairShop;
 	}
 
-	public List<Service> getServices() {
-		List<Service> list = services;
+	public List<Services> getServices() {
+		List<Services> list = services;
 		return list;
 	}
 
-	public void setServices(List<Service> services) {
+	public void setServices(List<Services> services) {
 		this.services = services;
 	}
 
@@ -115,7 +115,7 @@ public class Technician {
 				+ "]";
 	}
 
-	public void addService(Service service) {
+	public void addService(Services service) {
 		if (services == null) {
 			services = new ArrayList<>();
 		}
@@ -125,7 +125,7 @@ public class Technician {
 		}
 	}
 
-	public void removeService(Service service) {
+	public void removeService(Services service) {
 		if (services != null && services.contains(service)) {
 			services.remove(service);
 			service.removeTechnician(this);

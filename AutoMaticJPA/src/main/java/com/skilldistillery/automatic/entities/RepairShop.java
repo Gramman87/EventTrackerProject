@@ -39,7 +39,7 @@ public class RepairShop {
 
 	@JsonIgnore
 	@ManyToMany(mappedBy = "repairShops")
-	private List<Service> services;
+	private List<Services> services;
 
 	public RepairShop() {
 		super();
@@ -94,12 +94,12 @@ public class RepairShop {
 		this.technicians = technicians;
 	}
 
-	public List<Service> getServices() {
-		List<Service> list = services;
+	public List<Services> getServices() {
+		List<Services> list = services;
 		return list;
 	}
 
-	public void setServices(List<Service> services) {
+	public void setServices(List<Services> services) {
 		this.services = services;
 	}
 

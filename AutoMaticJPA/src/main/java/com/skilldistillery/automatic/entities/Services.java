@@ -17,7 +17,7 @@ import javax.persistence.ManyToMany;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-public class Service {
+public class Services {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -46,7 +46,7 @@ public class Service {
 	@JoinTable(name = "vehicle_service", joinColumns = @JoinColumn(name = "service_id"), inverseJoinColumns = @JoinColumn(name = "vehicle_id"))
 	private List<Vehicle> vehicles;
 
-	public Service() {
+	public Services() {
 		super();
 	}
 
@@ -130,13 +130,13 @@ public class Service {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Service other = (Service) obj;
+		Services other = (Services) obj;
 		return id == other.id;
 	}
 
 	@Override
 	public String toString() {
-		return "Service [id=" + id + ", type=" + type + ", created=" + created + ", odometer=" + odometer + ", cost="
+		return "Services [id=" + id + ", type=" + type + ", created=" + created + ", odometer=" + odometer + ", cost="
 				+ cost + "]";
 	}
 

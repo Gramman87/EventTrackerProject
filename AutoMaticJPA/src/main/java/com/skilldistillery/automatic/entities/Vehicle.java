@@ -16,6 +16,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -38,6 +39,9 @@ public class Vehicle {
 
 	@CreationTimestamp
 	private LocalDateTime created;
+	
+	@UpdateTimestamp
+	private LocalDateTime updated;
 
 	@ManyToOne
 	@JoinColumn(name = "vehicle_type_id")
@@ -45,7 +49,7 @@ public class Vehicle {
 
 	@JsonIgnore
 	@ManyToMany(mappedBy = "vehicles")
-	private List<Service> services;
+	private List<Services> services;
 
 	@JsonIgnore
 	@ManyToMany(cascade = CascadeType.PERSIST)
@@ -112,6 +116,14 @@ public class Vehicle {
 		this.created = created;
 	}
 
+	public LocalDateTime getUpdated() {
+		return updated;
+	}
+
+	public void setUpdated(LocalDateTime updated) {
+		this.updated = updated;
+	}
+
 	public VehicleType getVehicleType() {
 		return vehicleType;
 	}
@@ -120,12 +132,12 @@ public class Vehicle {
 		this.vehicleType = vehicleType;
 	}
 
-	public List<Service> getServices() {
-		List<Service> list = services;
+	public List<Services> getServices() {
+		List<Services> list = services;
 		return list;
 	}
 
-	public void setServices(List<Service> services) {
+	public void setServices(List<Services> services) {
 		this.services = services;
 	}
 
@@ -161,7 +173,7 @@ public class Vehicle {
 				+ ", color=" + color + ", created=" + created + ", vehicleTypeId=" + vehicleType + "]";
 	}
 
-	public void addService(Service service) {
+	public void addService(Services service) {
 		if (services == null) {
 			services = new ArrayList<>();
 		}
@@ -171,7 +183,7 @@ public class Vehicle {
 		}
 	}
 
-	public void removeService(Service service) {
+	public void removeService(Services service) {
 		if (services != null && services.contains(service)) {
 			services.remove(service);
 			service.removeVehicle(this);

@@ -15,66 +15,66 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.skilldistillery.automatic.entities.User;
-import com.skilldistillery.automatic.services.UserService;
+import com.skilldistillery.automatic.entities.Services;
+import com.skilldistillery.automatic.services.ServicesService;
 
 @RestController
 @RequestMapping("api")
-public class UserController {
+public class ServiceController {
 
 	@Autowired
-	private UserService userSvc;
+	private ServicesService servicesSvc;
 
-	@GetMapping("users")
-	public List<User> users() {
-		return userSvc.findAllUsers();
+	@GetMapping("services")
+	public List<Services> services() {
+		return servicesSvc.findAllServices();
 	}
 
-	@GetMapping("users/{id}")
-	public User showUser(@PathVariable Integer id, HttpServletResponse res) {
-		User user = userSvc.findUserById(id);
-		if (user == null) {
+	@GetMapping("services/{id}")
+	public Services showServices(@PathVariable Integer id, HttpServletResponse res) {
+		Services service = servicesSvc.findByServicesId(id);
+		if (service == null) {
 			res.setStatus(404);
 		}
-		return user;
+		return service;
 	}
 
-	@PostMapping("users")
-	public User createUser(@RequestBody User user, HttpServletRequest req, HttpServletResponse res) {
+	@PostMapping("services")
+	public Services createService(@RequestBody Services service, HttpServletRequest req, HttpServletResponse res) {
 		try {
-			userSvc.createUser(user);
+			servicesSvc.createServices(service);
 			res.setStatus(201);
 			StringBuffer url = req.getRequestURL();
-			url.append("/").append(user.getId());
+			url.append("/").append(service.getId());
 			res.setHeader("Location", url.toString());
 		} catch (Exception e) {
 			e.printStackTrace();
-			System.err.println("INVALID ENTRY FOR NEW User");
+			System.err.println("INVALID ENTRY FOR NEW Services");
 			res.setStatus(400);
-			user = null;
+			service = null;
 		}
-		return user;
+		return service;
 	}
 
-	@PutMapping("users/{id}")
-	public User updateUser(@PathVariable Integer id, @RequestBody User user, HttpServletResponse res) {
+	@PutMapping("services/{id}")
+	public Services updateService(@PathVariable Integer id, @RequestBody Services service, HttpServletResponse res) {
 		try {
-			user = userSvc.updateUser(id, user);
-			if (user == null) {
+			service = servicesSvc.updateServices(id, service);
+			if (service == null) {
 				res.setStatus(404);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			res.setStatus(400);
-			user = null;
+			service = null;
 		}
-		return user;
+		return service;
 	}
 
-	@DeleteMapping("users/{id}")
-	public void deleteUser(@PathVariable Integer id, HttpServletResponse res) {
+	@DeleteMapping("services/{id}")
+	public void deleteService(@PathVariable Integer id, HttpServletResponse res) {
 		try {
-			if (userSvc.deleteUser(id)) {
+			if (servicesSvc.deleteServices(id)) {
 				res.setStatus(204);
 			} else {
 				res.setStatus(404);
