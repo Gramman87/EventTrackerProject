@@ -3,6 +3,7 @@ package com.skilldistillery.automatic.services;
 import java.util.List;
 
 import com.skilldistillery.automatic.entities.User;
+import com.skilldistillery.automatic.entities.Vehicle;
 
 public interface UserService {
 
@@ -15,5 +16,7 @@ public interface UserService {
 	public User updateUser(int id, User user);
 
 	public boolean deleteUser(int id);
+	
+	public List<Vehicle> findVehiclesByUsersId(Integer id);
 
 }

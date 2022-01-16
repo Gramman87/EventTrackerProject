@@ -7,13 +7,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.skilldistillery.automatic.entities.User;
+import com.skilldistillery.automatic.entities.Vehicle;
 import com.skilldistillery.automatic.repositories.UserRepository;
+import com.skilldistillery.automatic.repositories.VehicleRepository;
 
 @Service
 public class UserServiceImpl implements UserService {
 
 	@Autowired
 	private UserRepository userRepo;
+	
+	@Autowired
+	private VehicleRepository vehicleRepo;
 
 	@Override
 	public List<User> findAllUsers() {
@@ -57,6 +62,14 @@ public class UserServiceImpl implements UserService {
 			deleted = true;
 		}
 		return deleted;
+	}
+
+	@Override
+	public List<Vehicle> findVehiclesByUsersId(Integer id) {
+		if (!userRepo.existsById(id)) {
+			return null;
+		}
+		return vehicleRepo.findByUsersId(id);
 	}
 
 }

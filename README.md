@@ -4,26 +4,28 @@
 
 The purpose of this solo project is to build a REST back-end API. I first designed my MySQL database using MySQL Workbench. I populated a large amount of test data using Mockaroo.com. Next I built out my entity classes using Spring Data JPA. In this phase I concurrently tested my entities and their JPA mappings using JUnit 5 for my TDD. Once I had all my entities built, mapped, and tested I turned my attention to the repositories, services, and service implementations. Then continued my way up the stack with my REST Controllers. The table below shows my REST API routes which were all tested in Postman before moving on to the frontend.
 
-|Return Type      | HTTP Method | URI                | Request Body |
-|-----------------|-------------|--------------------|--------------|
-| List\<Vehicle\> | GET         | /api/vehicles      |              |
-| Vehicle         | GET         | /api/vehicles/{id} |              |
-| Vehicle         | Post        | /api/vehicles      | Vehicle      |
-| Vehicle         | Post        | /api/vehicles/{id} | Vehicle      |
-| Void            | Delete      | /api/vehicles/{id} |              |
-|-----------------|-------------|--------------------|--------------|
-| List\<User\>    | GET         | /api/users         |              |
-| User            | GET         | /api/users/{id}    |              |
-| User            | Post        | /api/users         | User         |
-| User            | Post        | /api/users/{id}    | User         |
-| Void            | Delete      | /api/users/{id}    |              |
-|-----------------|-------------|--------------------|--------------|
-| List\<Services\>| GET         | /api/services      |              |
-| Service         | GET         | /api/services/{id} |              |
-| Service         | Post        | /api/services      | Service      |
-| Service         | Post        | /api/services/{id} | Service      |
-| Void            | Delete      | /api/services/{id} |              |
-|-----------------|-------------|--------------------|--------------|
+|Return Type       | HTTP Method | URI                         | Request Body |
+|------------------|-------------|-----------------------------|--------------|
+| List\<User\>     | GET         | /api/users                  |              |
+| User             | GET         | /api/users/{id}             |              |
+| User             | Post        | /api/users                  | User         |
+| User             | Post        | /api/users/{id}             | User         |
+| Void             | Delete      | /api/users/{id}             |              |
+| List\<Vehicle\>  | Get         | /api/users/{id}/vehicles    |              |
+|------------------|-------------|-----------------------------|--------------|
+| List\<Vehicle\>  | GET         | /api/vehicles               |              |
+| Vehicle          | GET         | /api/vehicles/{id}          |              |
+| Vehicle          | Post        | /api/vehicles               | Vehicle      |
+| Vehicle          | Post        | /api/vehicles/{id}          | Vehicle      |
+| Void             | Delete      | /api/vehicles/{id}          |              |
+| List\<Services\> | Delete      | /api/vehicles/{id}/services |              |
+|------------------|-------------|-----------------------------|--------------|
+| List\<Services\> | GET         | /api/services               |              |
+| Service          | GET         | /api/services/{id}          |              |
+| Service          | Post        | /api/services               | Service      |
+| Service          | Post        | /api/services/{id}          | Service      |
+| Void             | Delete      | /api/services/{id}          |              |
+|------------------|-------------|-----------------------------|--------------|
 
 ## Frontend Overview
 

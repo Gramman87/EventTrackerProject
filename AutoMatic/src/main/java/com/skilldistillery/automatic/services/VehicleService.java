@@ -2,6 +2,7 @@ package com.skilldistillery.automatic.services;
 
 import java.util.List;
 
+import com.skilldistillery.automatic.entities.Services;
 import com.skilldistillery.automatic.entities.Vehicle;
 
 public interface VehicleService {
@@ -15,5 +16,7 @@ public interface VehicleService {
 	public Vehicle updateVehicle(int vehicleId, Vehicle vehicle);
 
 	public boolean deleteVehicle(int vehicleId);
+	
+	public List<Services> findServicesByVehiclesId(Integer id);
 
 }

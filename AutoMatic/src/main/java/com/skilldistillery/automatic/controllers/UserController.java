@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.skilldistillery.automatic.entities.User;
+import com.skilldistillery.automatic.entities.Vehicle;
 import com.skilldistillery.automatic.services.UserService;
 
 @RestController
@@ -83,6 +84,15 @@ public class UserController {
 			e.printStackTrace();
 			res.setStatus(400);
 		}
+	}
+	
+	@GetMapping("users/{id}/vehicles")
+	public List<Vehicle> usersVehicles(@PathVariable Integer id, HttpServletResponse res) {
+		List<Vehicle> vehicles = userSvc.findVehiclesByUsersId(id);
+		if (vehicles == null) {
+			res.setStatus(404);
+		}
+		return vehicles;
 	}
 
 }

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.skilldistillery.automatic.entities.Services;
 import com.skilldistillery.automatic.entities.Vehicle;
 import com.skilldistillery.automatic.services.VehicleService;
 
@@ -83,6 +84,15 @@ public class VehicleController {
 			e.printStackTrace();
 			res.setStatus(400);
 		}
+	}
+
+	@GetMapping("vehicles/{id}/services")
+	public List<Services> vehicleServices(@PathVariable Integer id, HttpServletResponse res) {
+		List<Services> services = vehicleSvc.findServicesByVehiclesId(id);
+		if (services == null) {
+			res.setStatus(404);
+		}
+		return services;
 	}
 
 }

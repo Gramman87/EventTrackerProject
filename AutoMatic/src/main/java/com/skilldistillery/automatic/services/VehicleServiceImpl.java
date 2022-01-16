@@ -6,8 +6,10 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.skilldistillery.automatic.entities.Services;
 import com.skilldistillery.automatic.entities.Vehicle;
 import com.skilldistillery.automatic.entities.VehicleType;
+import com.skilldistillery.automatic.repositories.ServiceRepository;
 import com.skilldistillery.automatic.repositories.VehicleRepository;
 
 @Service
@@ -15,6 +17,9 @@ public class VehicleServiceImpl implements VehicleService {
 
 	@Autowired
 	private VehicleRepository vehicleRepo;
+
+	@Autowired
+	private ServiceRepository servRepo;
 
 	@Override
 	public List<Vehicle> findAllVehicles() {
@@ -69,6 +74,14 @@ public class VehicleServiceImpl implements VehicleService {
 			deleted = true;
 		}
 		return deleted;
+	}
+
+	@Override
+	public List<Services> findServicesByVehiclesId(Integer id) {
+		if (!vehicleRepo.existsById(id)) {
+			return null;
+		}
+		return servRepo.findByVehiclesId(id);
 	}
 
 }
