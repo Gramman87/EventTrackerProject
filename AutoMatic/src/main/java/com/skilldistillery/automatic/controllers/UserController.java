@@ -36,7 +36,7 @@ public class UserController {
 		User user = userSvc.findUserById(id);
 		if (user == null) {
 			res.setStatus(404);
-		}
+		} 
 		return user;
 	}
 

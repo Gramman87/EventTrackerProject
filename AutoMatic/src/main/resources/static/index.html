@@ -16,35 +16,36 @@
       <div id="uSearch">
         <h3>Search Users</h3>
         <form name="userForm">
-          <input type="number" name="userId" />
-          <button name="userSearch">Users ID</button> <br />
+          <label for="userId">User ID: </label> <input type="number" name="userId" />
+          <button name="userSearch">Search</button>
+          <button name="deleteUser">Delete</button>
         </form>
       </div>
       <hr />
       <div id="vSearch">
         <h3>Search Vehicles</h3>
         <form name="vehicleForm">
-          <input type="number" name="vehicleId" />
-          <button name="vehicleSearch">Vehicles ID</button> <br />
+          <label for="vehicleId">Vehicle ID: </label> <input type="number" name="vehicleId" />
+          <button name="vehicleSearch">Search</button> <br />
         </form>
       </div>
       <hr />
       <div id="uCreate">
         <h3>Create User</h3>
         <form name="newUserForm">
-          <label for="email">Email: </label
-          ><input type="text" name="email" required />
-          <br />
+          <label for="id">User ID: </label> <input type="text" name="id" required /> <br />
+          <label for="email">Email: </label> <input type="text" name="email" required /> <br />
           <label for="password">Password: </label> <input type="text" name="password" /> <br />
           <label for="fName">First Name: </label> <input type="text" name="fName" /> <br />
           <label for="lName">Last Name: </label> <input type="text" name="lName" /> <br />
           <button name="createUser">Create</button>
+          <button name="updateUser">Update</button>
         </form>
       </div>
       <hr />
       <div id="vCreate">
         <h3>Create Vehicle</h3>
-        <form name="newVehicle">
+        <form name="newVehicleForm">
           <label for="vin">VIN: </label> <input type="text" name="vin" /> <br />
           <label for="make">Make: </label> <input type="text" name="make" /> <br />
           <label for="model">Model: </label> <input type="text" name="model" /> <br />
