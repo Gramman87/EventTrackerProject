@@ -29,7 +29,7 @@ The purpose of this solo project is to build a REST back-end API. I first design
 
 ## Frontend Overview
 
-The first iteration of my frontend was put together using JavaScript, XMLHttp, and Html.
+The first iteration of my frontend was put together using JavaScript, XMLHttp, and Html. 
 
 ## Lessons Learned
 
