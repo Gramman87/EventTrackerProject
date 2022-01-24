@@ -27,6 +27,8 @@ public class User {
 	private String email;
 
 	private String password;
+	
+	private boolean enabled;
 
 	@Column(name = "first_name")
 	private String firstName;
@@ -70,6 +72,14 @@ public class User {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public boolean isEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
 	}
 
 	public String getFirstName() {

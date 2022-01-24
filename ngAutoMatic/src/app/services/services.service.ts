@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
 import { catchError, Observable, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Services } from '../models/services';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,12 +14,23 @@ export class ServicesService {
   private url = this.baseUrl +'api/services';
 
   constructor(
+    private auth: AuthService,
     private http: HttpClient,
     private date: DatePipe
   ) { }
 
+  getHttpOptions() {
+    let options = {
+      headers: {
+        Authorization: "Basic " + this.auth.getCredentials(),
+        "X-Requested-With": "XMLHttpRequest"
+      }
+    }
+    return options;
+  }
+
   index(): Observable<Services[]> {
-    return this.http.get<Services[]>(this.url).pipe(
+    return this.http.get<Services[]>(this.url, this.getHttpOptions()).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError(
@@ -31,7 +43,7 @@ export class ServicesService {
   }
 
   show(id: number): Observable<Services> {
-    return this.http.get<Services>(this.url + "/" + id).pipe(
+    return this.http.get<Services>(this.url + "/" + id, this.getHttpOptions()).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError(
@@ -44,7 +56,7 @@ export class ServicesService {
   }
 
   create(service: Services): Observable<Services[]> {
-    return this.http.post<Services[]>(this.url, service).pipe(
+    return this.http.post<Services[]>(this.url, service, this.getHttpOptions()).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError(
@@ -57,7 +69,7 @@ export class ServicesService {
   }
 
   update(service: Services) {
-    return this.http.put<Services>(this.url + "/" + service.id, service).pipe(
+    return this.http.put<Services>(this.url + "/" + service.id, service, this.getHttpOptions()).pipe(
       catchError((err: any) => {
         console.error("ServicesService.update(): error updating Service:");
         console.error(err);
@@ -71,7 +83,7 @@ export class ServicesService {
   }
 
   destroy(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.url}/${id}`).pipe(
+    return this.http.delete<void>(`${this.url}/${id}`, this.getHttpOptions()).pipe(
       catchError((err: any) => {
         console.error("ServicesService.destroy(): error deleting Service:");
         console.error(err);

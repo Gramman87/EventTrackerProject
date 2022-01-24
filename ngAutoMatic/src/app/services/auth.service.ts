@@ -16,8 +16,8 @@ export class AuthService {
     const credentials = this.generateBasicAuthCredentials(username, password);
     const httpOptions = {
       headers: new HttpHeaders({
-        "Authorization": "Basic ${credentials}",
-        "X-Requested-With": "XMLHttpRequest"
+        'Authorization': `Basic ${credentials}`,
+        'X-Requested-With': 'XMLHttpRequest'
       })
     };
 

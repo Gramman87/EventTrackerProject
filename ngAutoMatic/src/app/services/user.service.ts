@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
 import { catchError, Observable, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { User } from '../models/user';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,12 +14,23 @@ export class UserService {
   private url = this.baseUrl +'api/users';
 
   constructor(
+    private auth: AuthService,
     private http: HttpClient,
     private date: DatePipe
   ) { }
 
+  getHttpOptions() {
+    let options = {
+      headers: {
+        Authorization: "Basic " + this.auth.getCredentials(),
+        "X-Requested-With": "XMLHttpRequest"
+      }
+    }
+    return options;
+  }
+
   index(): Observable<User[]> {
-    return this.http.get<User[]>(this.url).pipe(
+    return this.http.get<User[]>(this.url, this.getHttpOptions()).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError(
@@ -31,7 +43,7 @@ export class UserService {
   }
 
   show(id: number): Observable<User> {
-    return this.http.get<User>(this.url + "/" + id).pipe(
+    return this.http.get<User>(this.url + "/" + id, this.getHttpOptions()).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError(
@@ -44,7 +56,7 @@ export class UserService {
   }
 
   create(user: User): Observable<User[]> {
-    return this.http.post<User[]>(this.url, user).pipe(
+    return this.http.post<User[]>(this.url, user, this.getHttpOptions()).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError(
@@ -57,7 +69,7 @@ export class UserService {
   }
 
   update(user: User) {
-    return this.http.put<User>(this.url + "/" + user.id, user).pipe(
+    return this.http.put<User>(this.url + "/" + user.id, user, this.getHttpOptions()).pipe(
       catchError((err: any) => {
         console.error("UserService.destroy(): error updating User:");
         console.error(err);
@@ -71,7 +83,7 @@ export class UserService {
   }
 
   destroy(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.url}/${id}`).pipe(
+    return this.http.delete<void>(`${this.url}/${id}`, this.getHttpOptions()).pipe(
       catchError((err: any) => {
         console.error("UserService.destroy(): error deleting user:");
         console.error(err);

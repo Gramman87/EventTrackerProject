@@ -13,7 +13,9 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'vehicles', component: VehicleListComponent },
+  { path: 'vehicles/:id', component: VehicleListComponent },
   { path: 'services', component: ServicesListComponent },
+  { path: 'services/:id', component: ServicesListComponent },
   { path: '**', component: NotFoundComponent }
 ];
 

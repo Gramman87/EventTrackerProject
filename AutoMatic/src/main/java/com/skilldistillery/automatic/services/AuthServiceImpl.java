@@ -7,6 +7,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.skilldistillery.automatic.entities.User;
+import com.skilldistillery.automatic.repositories.UserRepository;
 
 @Transactional
 @Service
@@ -16,13 +17,14 @@ public class AuthServiceImpl implements AuthService {
 	private PasswordEncoder encoder;
 	
 	@Autowired
-	private UserService userSvc;
+	private UserRepository userRepo;
 
 	@Override
 	public User register(User user) {
 		user.setPassword(encoder.encode(user.getPassword()));
-		userSvc.createUser(user);
-		return null;
+		user.setEnabled(true);
+		userRepo.saveAndFlush(user);
+		return user;
 	}
 
 }
