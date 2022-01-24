@@ -95,12 +95,13 @@ DROP TABLE IF EXISTS `user` ;
 CREATE TABLE IF NOT EXISTS `user` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `email` VARCHAR(300) NOT NULL,
-  `password` VARCHAR(50) NULL,
+  `password` VARCHAR(300) NOT NULL,
   `first_name` VARCHAR(100) NULL,
   `last_name` VARCHAR(150) NULL,
   `created` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`));
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `email_UNIQUE` (`email` ASC));
 
 
 -- -----------------------------------------------------

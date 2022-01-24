@@ -16,6 +16,7 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
 import { LoginComponent } from './components/login/login.component';
 import { LogoutComponent } from './components/logout/logout.component';
 import { AuthService } from './services/auth.service';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { AuthService } from './services/auth.service';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    FormsModule,
     NgbModule
   ],
   providers: [VehicleService, UserService, ServicesService, DatePipe, AuthService],

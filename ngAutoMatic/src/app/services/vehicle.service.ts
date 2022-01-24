@@ -2,13 +2,14 @@ import { DatePipe } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, Observable, throwError } from 'rxjs';
+import { environment } from 'src/environments/environment';
 import { Vehicle } from '../models/vehicle';
 
 @Injectable({
   providedIn: 'root'
 })
 export class VehicleService {
-  private baseUrl = 'http://localhost:8080/';
+  private baseUrl = environment.baseUrl;
   private url = this.baseUrl +'api/vehicles';
 
   constructor(
