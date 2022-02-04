@@ -16,13 +16,18 @@ public class UserServiceImpl implements UserService {
 
 	@Autowired
 	private UserRepository userRepo;
-	
+
 	@Autowired
 	private VehicleRepository vehicleRepo;
 
 	@Override
 	public List<User> findAllUsers() {
 		return userRepo.findAll();
+	}
+
+	@Override
+	public User findByUsername(String name) {
+		return userRepo.findByUsername(name);
 	}
 
 	@Override
@@ -40,7 +45,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public User updateUser(int id, User user) {
+	public User updateUser(String name, int id, User user) {
 		Optional<User> optUser = userRepo.findById(id);
 		User managed = null;
 		if (optUser.isPresent()) {

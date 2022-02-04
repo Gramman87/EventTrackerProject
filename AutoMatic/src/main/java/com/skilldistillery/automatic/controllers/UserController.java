@@ -1,5 +1,6 @@
 package com.skilldistillery.automatic.controllers;
 
+import java.security.Principal;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -22,7 +23,7 @@ import com.skilldistillery.automatic.services.UserService;
 
 @RestController
 @RequestMapping("api")
-@CrossOrigin({"*", "http://localhost:4202"})
+@CrossOrigin({ "*", "http://localhost:4202" })
 public class UserController {
 
 	@Autowired
@@ -33,13 +34,25 @@ public class UserController {
 		return userSvc.findAllUsers();
 	}
 
-	@GetMapping("users/{id}")
-	public User showUser(@PathVariable Integer id, HttpServletResponse res) {
-		User user = userSvc.findUserById(id);
-		if (user == null) {
-			res.setStatus(404);
-		} 
+	@GetMapping("users/username")
+	public User getUserByUsername(Principal principal) {
+		User user = userSvc.findByUsername(principal.getName());
 		return user;
+	}
+
+	@GetMapping("users/{id}")
+	public User showUser(Principal principal, @RequestBody User user, @PathVariable Integer id,
+			HttpServletResponse res) {
+		try {
+			if (principal.getName().equals(user.getUsername())) {
+				return userSvc.updateUser(principal.getName(), id, user);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			res.setStatus(400);
+			user = null;
+		}
+		return null;
 	}
 
 	@PostMapping("users")
@@ -60,9 +73,10 @@ public class UserController {
 	}
 
 	@PutMapping("users/{id}")
-	public User updateUser(@PathVariable Integer id, @RequestBody User user, HttpServletResponse res) {
+	public User updateUser(Principal principal, @PathVariable Integer id, @RequestBody User user,
+			HttpServletResponse res) {
 		try {
-			user = userSvc.updateUser(id, user);
+			user = userSvc.updateUser(principal.getName(), id, user);
 			if (user == null) {
 				res.setStatus(404);
 			}
@@ -87,7 +101,7 @@ public class UserController {
 			res.setStatus(400);
 		}
 	}
-	
+
 	@GetMapping("users/{id}/vehicles")
 	public List<Vehicle> usersVehicles(@PathVariable Integer id, HttpServletResponse res) {
 		List<Vehicle> vehicles = userSvc.findVehiclesByUsersId(id);
