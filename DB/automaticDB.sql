@@ -98,6 +98,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `email` VARCHAR(300) NOT NULL,
   `password` VARCHAR(300) NOT NULL,
   `enabled` TINYINT NULL,
+  `role` VARCHAR(45) NULL,
   `first_name` VARCHAR(100) NULL,
   `last_name` VARCHAR(150) NULL,
   `created` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,

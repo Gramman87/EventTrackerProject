@@ -15,7 +15,7 @@ import com.skilldistillery.automatic.entities.User;
 import com.skilldistillery.automatic.services.AuthService;
 
 @RestController
-@CrossOrigin({ "*", "http://localhost:4200" })
+@CrossOrigin({ "*", "http://localhost:4202" })
 public class AuthController {
 
 	@Autowired
@@ -30,9 +30,9 @@ public class AuthController {
 		return user;
 	}
 
-	@GetMapping("/authenticate")
-	public Principal authenticate(Principal principal) {
-		return principal;
+	@GetMapping("/login")
+	public User authenticate(Principal principal) {
+		return authSvc.findUserByName(principal.getName());
 	}
 
 }

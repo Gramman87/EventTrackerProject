@@ -31,6 +31,8 @@ public class User {
 	private String password;
 	
 	private boolean enabled;
+	
+	private String role;
 
 	@Column(name = "first_name")
 	private String firstName;
@@ -90,6 +92,14 @@ public class User {
 
 	public void setEnabled(boolean enabled) {
 		this.enabled = enabled;
+	}
+
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
 	}
 
 	public String getFirstName() {
